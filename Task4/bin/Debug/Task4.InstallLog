@@ -1,0 +1,13 @@
+﻿Выполняется установка сборки 'D:\GitHub\Task4\Task4\bin\Debug\Task4.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = D:\GitHub\Task4\Task4\bin\Debug\Task4.InstallLog
+   assemblypath = D:\GitHub\Task4\Task4\bin\Debug\Task4.exe
+Устанавливается служба Service1...
+Служба Service1 успешно установлена.
+Создается исходный EventLog Service1 в журнале Application...
+Выполняется фиксация сборки 'D:\GitHub\Task4\Task4\bin\Debug\Task4.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = D:\GitHub\Task4\Task4\bin\Debug\Task4.InstallLog
+   assemblypath = D:\GitHub\Task4\Task4\bin\Debug\Task4.exe

@@ -7,6 +7,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
+using Task4.WatcherReportLogic;
 
 namespace Task4
 {
@@ -19,8 +20,7 @@ namespace Task4
 
         protected override void OnStart(string[] args)
         {
-
-
+            Watcher watcer = new Watcher();
         }
 
         protected override void OnStop()

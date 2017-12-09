@@ -1,0 +1,11 @@
+D:\GitHub\Task4\DAL\bin\Debug\DAL.dll.config
+D:\GitHub\Task4\DAL\bin\Debug\DAL.dll
+D:\GitHub\Task4\DAL\bin\Debug\DAL.pdb
+D:\GitHub\Task4\DAL\bin\Debug\EntityFramework.dll
+D:\GitHub\Task4\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\Task4\DAL\bin\Debug\EntityFramework.xml
+D:\GitHub\Task4\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\Task4\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\GitHub\Task4\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\GitHub\Task4\DAL\obj\Debug\DAL.dll
+D:\GitHub\Task4\DAL\obj\Debug\DAL.pdb
