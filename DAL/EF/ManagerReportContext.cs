@@ -7,14 +7,13 @@ namespace DAL.EF
     public class ManagerReportContext : DbContext
     {
         public ManagerReportContext()
-            : base("DbManagerConnection")
+            : base("ReportManager")
         { }
 
         public ManagerReportContext(string connectionString)
             : base(connectionString)
         {
         }
-
         public DbSet<DAL.Entities.ManagerReport> Reports { get; set; }
     }
 }

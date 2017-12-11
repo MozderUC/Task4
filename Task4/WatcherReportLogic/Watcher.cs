@@ -4,47 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using Task4.CustomDataClass;
+using Task4.DTO;
+using DAL.Interfaces;
+using DAL.Repositories;
+using System.Configuration;
 
 namespace Task4.WatcherReportLogic
 {
     class Watcher
-    {
-        //private RecordsHandler recordsHandler;
-        private ReportParser parser;
+    {        
+        private ServiceModule service;
         private FileSystemWatcher dirWatcher;
         private Task task;
 
         public Watcher()
-        {
-            parser = new ReportParser();
-
-            //_recordsHandler = new RecordsHandler();
-            dirWatcher = new FileSystemWatcher(@"D:\CSVFiles");
-            //_fileWatcher.Path = ConfigurationManager.AppSettings[@"D:\CSVFiles"];
+        {              
+            service = new ServiceModule();            
+            dirWatcher = new FileSystemWatcher(@"D:\CSVFiles");            
             dirWatcher.Filter = "*.csv";
             dirWatcher.NotifyFilter = NotifyFilters.FileName;
 
-            dirWatcher.Changed += new FileSystemEventHandler(OnChanged);
-            dirWatcher.Created += new FileSystemEventHandler(OnChanged);
+            dirWatcher.Changed += new FileSystemEventHandler(GetTask);
+            dirWatcher.Created += new FileSystemEventHandler(GetTask);
             dirWatcher.EnableRaisingEvents = true;
         }
-
-        public void run()
-        {
-
-        }
-        public void OnChanged(object source, FileSystemEventArgs e)
-        {
-            task = new Task(() => CallParse(source, e));
+     
+        public void GetTask(object source, FileSystemEventArgs e)
+        {            
+            task = new Task(() => StartParsing(source, e));
             task.Start();
         }
-        public void CallParse(object source, FileSystemEventArgs e)
-        {            
-            List<ManagerReport> rep = parser.getReportList(e.FullPath);
-
-
-            //_recordsHandler.SaveRecords(path);
+        public void StartParsing(object source, FileSystemEventArgs e)
+        {
+            service.HandleReports(e.FullPath);          
         }
         public void Dispose()
         {

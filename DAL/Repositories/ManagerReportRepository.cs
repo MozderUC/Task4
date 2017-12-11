@@ -13,11 +13,15 @@ namespace DAL.Repositories
 {
     public class ManagerReportRepository : IRepository<ManagerReport>
     {
-        private ManagerReportContext db;
-
-        public ManagerReportRepository(ManagerReportContext context)
+        private ManagerReportContext db;      
+        
+        public ManagerReportRepository()
         {
-            this.db = context;
+            this.db = new DAL.EF.ManagerReportContext();
+        }
+        public ManagerReportRepository(string connectionstring)
+        {
+            this.db = new DAL.EF.ManagerReportContext(connectionstring);
         }
 
         public IEnumerable<ManagerReport> GetAll()
@@ -30,26 +34,40 @@ namespace DAL.Repositories
             return db.Reports.Find(id);
         }
 
-        public void Create(ManagerReport book)
+        public void Create(ManagerReport report)
         {
-            db.Reports.Add(book);
+            db.Reports.Add(report);
         }
-
-        public void Update(ManagerReport book)
+        
+        public void SaveChanges()
         {
-            db.Entry(book).State = EntityState.Modified;
-        }
-
-        public IEnumerable<ManagerReport> Find(Func<ManagerReport, Boolean> predicate)
-        {
-            return db.Reports.Where(predicate).ToList();
+            db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            ManagerReport book = db.Reports.Find(id);
-            if (book != null)
-                db.Reports.Remove(book);
+            ManagerReport report = db.Reports.Find(id);
+            if (report != null)
+                db.Reports.Remove(report);
+        }
+
+        private bool disposed = false;
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

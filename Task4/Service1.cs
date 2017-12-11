@@ -13,6 +13,7 @@ namespace Task4
 {
     public partial class Service1 : ServiceBase
     {
+        //private Watcher watcer = new Watcher();
         public Service1()
         {
             InitializeComponent();
@@ -20,12 +21,12 @@ namespace Task4
 
         protected override void OnStart(string[] args)
         {
-            Watcher watcer = new Watcher();
+           Watcher watcer = new Watcher();
         }
 
         protected override void OnStop()
         {
-
+            //watcer.Dispose();
         }
     }
 }

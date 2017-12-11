@@ -1,6 +1,7 @@
 ﻿using System;
 using DAL.EF;
 using DAL.Entities;
+using DAL.Repositories;
 
 
 namespace ConsoleApp1
@@ -8,26 +9,27 @@ namespace ConsoleApp1
     class Program
     {
         static void Main(string[] args)
-        {
-            using ( ManagerReportContext db = new ManagerReportContext() )
-            {                      
-                ManagerReport user1 = new ManagerReport { ManagerFirstName = "Tom", ManagerLastName = "Jenkins", ClienFirstName = "Karl", ClientLastName  = "Sprezevalski", ProductName  = "Tomatos" , ProductCost = 3 };
-                ManagerReport user2 = new ManagerReport { ManagerFirstName = "Martin", ManagerLastName = "Vainstaiger", ClienFirstName = "Oleg", ClientLastName = "Gulakov", ProductName = "Chips", ProductCost = 6 };
+        {           
+            DAL.Interfaces.IRepository<DAL.Entities.ManagerReport> dd = new ManagerReportRepository();
+                                            
+            var user1 = new ManagerReport (DateTime.Now,"Jon","Vlad","Petrov","Tomatos",12);
+            var user2 = new ManagerReport(DateTime.Now, "Jonas", "Hood", "Aroon", "Chips", 7);
 
-                // добавляем их в бд
-                db.Reports.Add(user1);
-                db.Reports.Add(user2);
-                db.SaveChanges();
-                Console.WriteLine("Объекты успешно сохранены");
+            // добавляем их в бд
+            dd.Create(user1);
+            dd.Create(user2);
+            dd.SaveChanges();
+            //Console.WriteLine("Объекты успешно сохранены");
 
-                // получаем объекты из бд и выводим на консоль
-                var reports = db.Reports;
-                Console.WriteLine("Список объектов:");
-                foreach (ManagerReport u in reports)
-                {
-                    Console.WriteLine("{0},{1},{2},{3},{4},{5}",u.Id,u.ManagerFirstName,u.ManagerLastName,u.ClienFirstName,u.ClientLastName,u.ProductName);
-                }
+            // получаем объекты из бд и выводим на консоль
+            
+            var reports = dd.GetAll();
+            Console.WriteLine("Список объектов:");
+            foreach (ManagerReport u in reports)
+            {
+              Console.WriteLine("{0},{1},{2},{3},{4},{5}",u.Id,u.ManagerLastName,u.ClienFirstName,u.ClientLastName,u.ProductName,u.ProductCost);
             }
+            
             Console.Read();
         }
     }
